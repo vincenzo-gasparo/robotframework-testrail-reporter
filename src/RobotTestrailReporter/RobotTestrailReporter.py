@@ -1,5 +1,4 @@
 import logging
-import os
 import pprint
 import testrail
 
@@ -22,7 +21,7 @@ def configure_logging():
     logging.getLogger().addHandler(console_handler)
 
 
-class TestRailRobotReporter(object):
+class RobotTestrailReporter(object):
 
     def __init__(self):
         configure_logging()
@@ -210,7 +209,7 @@ def main():
     tag = args.tag
     pp = pprint.PrettyPrinter()
     tr_api = testrail.client.API(email=email, key=key, url=url)
-    reporter = TestRailRobotReporter()
+    reporter = RobotTestrailReporter()
     res = reporter.find_tests_tagged_by(input_file, tag)
     logging.debug(pp.pformat(res))
     res = reporter.replace_caseid_with_testid(api=tr_api, results=res, run_id=tr_run_id)

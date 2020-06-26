@@ -3,14 +3,13 @@
 from os.path import abspath, dirname, join
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError as error:
     from distutils.core import setup
 
 VERSION = ""
-DESCRIPTION = """
-Library used to update TestRail test run status from RobotFramework output.xml
-"""[1:-1]
+with open("README.md", "r") as f:
+    DESCRIPTION = f.read()
 
 CLASSIFIERS = """
 Development Status :: 2 - Pre-Alpha
@@ -20,7 +19,7 @@ Programming Language :: Python
 Topic :: Software Development :: Testing
 """[1:-1]
 
-version_file = join(dirname(abspath(__file__)), 'src', 'TestRailRobotReporter', 'version.py')
+version_file = join(dirname(abspath(__file__)), 'src', 'RobotTestRailReporter', 'version.py')
 
 with open(version_file) as file:
     code = compile(file.read(), version_file, 'exec')
@@ -31,24 +30,24 @@ setup(
     version=VERSION,
     description='robotframework-testrail-reporter',
     long_description=DESCRIPTION,
+    long_description_content_type="text/markdown",
     author='Vincenzo Gasparo',
     author_email='vincenzo.gasparo@gmail.it',
     maintainer='Vincenzo Gasparo',
     maintainer_email='vincenzo.gasparo@gmail.it',
-    url='',
+    url='https://github.com/vincenzo-gasparo/robotframework-testrail-reporter',
     license='MIT',
-    keywords='robotframework testrail test  testinga utomation',
+    keywords='robotframework testrail test  testing automation',
     platforms='any',
     classifiers=CLASSIFIERS.splitlines(),
     package_dir={'': 'src'},
-    packages=['TestRailRobotReporter'],
+    packages=find_packages('src'),
     install_requires=[
         'lxml',
         'testrail'
     ],
-    entry_points={'console_scripts':
-                      ['rf-tr-reporter = RobotTestrailReporter.RobotTestrailReporter:run_cli']}
-      )
+    entry_points={'console_scripts': ['rf-tr-reporter=RobotTestrailReporter.RobotTestrailReporter:main']}
+)
 
 """ Official release from master
 # make sure the setup version has been increased

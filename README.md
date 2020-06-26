@@ -1,4 +1,4 @@
-<img src="rftr.png" alt="Robot Frameworkg logo" class="img-fluid" style="background-color: black;">
+<img src="https://raw.githubusercontent.com/vincenzo-gasparo/robotframework-testrail-reporter/master/rftr.png" alt="robotframework-testrail-reporter" class="img-fluid">
 
 # robotframework-testrail-reporter
 

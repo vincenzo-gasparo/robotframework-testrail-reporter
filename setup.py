@@ -19,15 +19,9 @@ Programming Language :: Python
 Topic :: Software Development :: Testing
 """[1:-1]
 
-version_file = join(dirname(abspath(__file__)), 'src', 'RobotTestRailReporter', 'version.py')
-
-with open(version_file) as file:
-    code = compile(file.read(), version_file, 'exec')
-    exec(code)
-
 setup(
     name='robotframework-testrail-reporter',
-    version=VERSION,
+    version="0.0.11",
     description='robotframework-testrail-reporter',
     long_description=DESCRIPTION,
     long_description_content_type="text/markdown",

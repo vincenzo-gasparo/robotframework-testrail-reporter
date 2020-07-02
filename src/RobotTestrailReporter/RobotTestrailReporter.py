@@ -143,13 +143,15 @@ class RobotTestrailReporter(object):
                     if mapping[result['test_case_id']]['status_id'] == 2 and ignore_blocked:  # Ignore blocked test
                         pass
                     else:
-                        result['test_id'] = mapping[result['test_case_id']]['id']
-                        results_to_return[run].append(result)
+                        result_copy = dict(result)
+                        result_copy['test_id'] = mapping[result['test_case_id']]['id']
+                        results_to_return[run].append(result_copy)
         all_found = [r for r in results_to_return.values() if r]
         # all_found contains all executed tests found in test runs
         all_found = [found['test_case_id'] for found_dict in all_found for found in found_dict]
         not_found = set(test_cases_ids) - set(all_found)
-        logging.error("Following Test Cases are not present in in Runs: %s: %s" % (runs, not_found))
+        if not_found:
+            logging.error("Following Test Cases are not present in in Runs: %s: %s" % (runs, not_found))
         return results_to_return
 
     def get_elapsed(self, status):
@@ -284,7 +286,7 @@ def main():
                 reporter.publish_results(api=tr_api, run_id=runid, results=results)
                 logging.debug("Tests found in RF XML mapped with run test id: %s\n" % runid)
                 logging.debug(pp.pformat(results))
-                logging.info("Results for test run: %s\n" % runid)
+                logging.info("\nResults for test run: %s\n" % runid)
                 res_to_print = ["Test name: %s, Test id: %s, Status: %s" %
                                 (result['rf_test_name'], result['test_id'],
                                  reporter.tr_to_rf_status[result['status_id']])

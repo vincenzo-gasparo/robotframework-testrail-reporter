@@ -21,7 +21,7 @@ Topic :: Software Development :: Testing
 
 setup(
     name='robotframework-testrail-reporter',
-    version="0.0.16",
+    version="0.0.17",
     description='robotframework-testrail-reporter',
     long_description=DESCRIPTION,
     long_description_content_type="text/markdown",
